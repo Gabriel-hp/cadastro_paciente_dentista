@@ -4,25 +4,50 @@
 */
 class pacienteDAO{
 
+    public function buscarPorId($id) {
+        try {
+            $sql = "SELECT * FROM pacientes WHERE id_paciente = :id";
+            $p_sql = Conexao::getConexao()->prepare($sql);
+            $p_sql->bindValue(":id", $id);
+            $p_sql->execute();
+            $paciente = $p_sql->fetch(PDO::FETCH_ASSOC);
+            
+            if ($paciente) {
+                // Se o paciente foi encontrado, criar um objeto paciente e retorná-lo
+                $pacienteObj = new paciente();
+                $pacienteObj->setId_paciente($paciente['id_paciente']);
+                $pacienteObj->setNome($paciente['nome']);
+                // Definir outras propriedades do paciente conforme necessário
+                
+                return $pacienteObj;
+            } else {
+                // Se o paciente não foi encontrado, retornar null ou uma mensagem de erro
+                return null;
+            }
+        } catch (Exception $e) {
+            // Lidar com exceções, se necessário
+            echo "Erro ao buscar paciente: " . $e->getMessage();
+            return null;
+        }
+    }
+
         
     
     public function create(paciente $paciente) {
-
         
 
         try {
-            $sql = "INSERT INTO paciente (                   
-                  nome,proce,dataCon,sexo,obser,hora)
+            $sql = "INSERT INTO pacientes (                   
+                  nome,endereco,email,telefone,data_nasc)
                   VALUES (
-                  :nome,:proce,:dataCon,:sexo,:obser,:hora)";
+                  :nome,:endereco,:email,:telefone,:data_nasc)";
 
             $p_sql = Conexao::getConexao()->prepare($sql);
             $p_sql->bindValue(":nome", $paciente->getNome());
-            $p_sql->bindValue(":proce", $paciente->getProce());
-            $p_sql->bindValue(":dataCon", $paciente->getDataCon());
-            $p_sql->bindValue(":sexo", $paciente->getSexo());
-            $p_sql->bindValue(":obser", $paciente->getObser());
-            $p_sql->bindValue(":hora", $paciente->getHora());
+            $p_sql->bindValue(":endereco", $paciente->getEndereco());
+            $p_sql->bindValue(":email", $paciente->getEmail());
+            $p_sql->bindValue(":telefone", $paciente->getTelefone());
+            $p_sql->bindValue(":data_nasc", $paciente->getData_nasc());
 
             
             return $p_sql->execute();
@@ -33,14 +58,14 @@ class pacienteDAO{
 
     public function read($where = '') {
         try {
-            $sql = "SELECT * FROM paciente";
+            $sql = "SELECT * FROM pacientes";
             
             // Adiciona a cláusula WHERE se uma condição foi fornecida
             if (!empty($where)) {
                 $sql .= " WHERE " . $where;
             }
             
-            $sql .= " ORDER BY id ASC";
+            $sql .= " ORDER BY id_paciente ASC";
     
             $result = Conexao::getConexao()->query($sql);
             $lista = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -59,24 +84,19 @@ class pacienteDAO{
         try {
             $sql = "UPDATE paciente SET
                 nome = :nome,
-                proce = :proce,
-                dataCon = :dataCon,
-                hora = :hora,
-                sexo = :sexo, 
-                obser = :obser
-                WHERE id = :id";
+                endereco = :endereco,
+                email = :email,
+                telefone = :telefone,
+                data_nasc = :data_nasc, 
+                WHERE id_paciente = :id_paciente";
     
             $p_sql = Conexao::getConexao()->prepare($sql);
             $p_sql->bindValue(":nome", $paciente->getNome());
-            $p_sql->bindValue(":proce", $paciente->getProce());
-            
-            // Ajuste da data para o formato 'Y-m-d'
-            $dataCon = date("Y-m-d", strtotime(str_replace('/', '-', $paciente->getDataCon())));
-            $p_sql->bindValue(":dataCon", $dataCon);
-            $p_sql->bindValue(":hora", $hora);
-            $p_sql->bindValue(":sexo", $paciente->getSexo());
-            $p_sql->bindValue(":id", $paciente->getId());
-            $p_sql->bindValue(":obser", $paciente->getObser());
+            $p_sql->bindValue(":endereco", $paciente->getEndereco());
+            $p_sql->bindValue(":email", $paciente->getEmail());
+            $p_sql->bindValue(":telefone", $paciente->getTelefone());
+            $p_sql->bindValue(":data_nasc", $paciente->getData_nasc());
+            $p_sql->bindValue(":id_paciente", $paciente->getId());
     
             return $p_sql->execute();
         } catch (Exception $e) {
@@ -87,28 +107,23 @@ class pacienteDAO{
 
     public function delete(paciente $paciente) {
         try {
-            $sql = "DELETE FROM paciente WHERE id = :id";
+            $sql = "DELETE FROM paciente WHERE id_paciente = :id_paciente";
             $p_sql = Conexao::getConexao()->prepare($sql);
-            $p_sql->bindValue(":id", $paciente->getId());
+            $p_sql->bindValue(":id_paciente", $paciente->getId_paciente());
             return $p_sql->execute();
         } catch (Exception $e) {
             echo "Erro ao Excluir usuario<br> $e <br>";
         }
     }
 
-
-    
-
     private function listaUsuarios($row) {
         $paciente = new paciente();
-        $paciente->setId($row['id']);
+        $paciente->setId_paciente($row['id_paciente']);
         $paciente->setNome($row['nome']);
-        $paciente->setProce($row['proce']);
-        $paciente->setDataCon($row['dataCon']);
-        $paciente->setHora($row['hora']);
-        $paciente->setSexo($row['sexo']);
-        $paciente->setObser($row['obser']);
-
+        $paciente->setEndereco($row['endereco']);
+        $paciente->setEmail($row['email']);
+        $paciente->setTelefone($row['telefone']);
+        $paciente->setData_nasc($row['data_nasc']);
 
         return $paciente;
     }
