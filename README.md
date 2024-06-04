@@ -6,7 +6,7 @@ O Sistema de Gerenciamento de Clínica Odontológica é uma aplicação web dese
 ## Requisitos do Sistema
 
 ### Requisitos Funcionais
-- **Cadastro de Pacientes:** Cadastro de novos pacientes com informações como nome, CPF, telefone, e-mail, etc.
+- **Cadastro de Pacientes:** Cadastro de novos pacientes com informações como nome, telefone, e-mail, etc.
 - **Cadastro de Médicos:** Cadastro de médicos com detalhes como nome, especialidade, telefone, e-mail, etc.
 - **Marcação de Consultas:** Marcação de consultas com médicos disponíveis em datas e horários específicos.
 - **Lembrete de Consulta:** Envio de lembretes automáticos de consulta por e-mail para os pacientes alguns dias antes da data da consulta.
