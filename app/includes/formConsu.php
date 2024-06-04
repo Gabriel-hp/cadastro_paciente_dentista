@@ -1,3 +1,4 @@
+<title >Marcar consultas</title>
 <main>
 
 
@@ -10,7 +11,6 @@
         </div>
     </nav>
 
-    <hr>
 
     <form action="app/controladores/ConsultaController.php" method="POST">
         <div class="container">

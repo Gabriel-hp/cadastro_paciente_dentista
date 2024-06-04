@@ -7,9 +7,9 @@ class medicoDAO{
     
     public function buscarPorId($id) {
         try {
-            $sql = "SELECT * FROM medicos WHERE id_medico = :id";
+            $sql = "SELECT * FROM medicos WHERE id_medico = :id_medico";
             $p_sql = Conexao::getConexao()->prepare($sql);
-            $p_sql->bindValue(":id", $id);
+            $p_sql->bindValue(":id_medico", $id);
             $p_sql->execute();
             $medico = $p_sql->fetch(PDO::FETCH_ASSOC);
             
@@ -82,30 +82,33 @@ class medicoDAO{
      
     public function update(medico $medico) {
         try {
-            $sql = "UPDATE medico SET
-                nome = :nome,
-                especialidade = :especialidade,
-                email = :email,
-                telefone = :telefone,
-                WHERE id_medico = :id_medico";
+            $sql = "UPDATE medicos 
+            SET nome = :nome, 
+            especialidade = :especialidade, 
+            email = :email, 
+            telefone = :telefone 
+            WHERE id_medico = :id_medico";
     
             $p_sql = Conexao::getConexao()->prepare($sql);
             $p_sql->bindValue(":nome", $medico->getNome());
             $p_sql->bindValue(":especialidade", $medico->getEspecialidade());
             $p_sql->bindValue(":email", $medico->getEmail());
             $p_sql->bindValue(":telefone", $medico->getTelefone());
-            $p_sql->bindValue(":id_medico", $medico->getId());
+            $p_sql->bindValue(":id_medico", $medico->getId_medico());
     
             return $p_sql->execute();
         } catch (Exception $e) {
             print "Ocorreu um erro ao tentar fazer Update<br> $e <br>";
         }
     }
+
+
+
     
 
     public function delete(medico $medico) {
         try {
-            $sql = "DELETE FROM medico WHERE id_medico = :id_medico";
+            $sql = "DELETE FROM medicos WHERE id_medico = :id_medico";
             $p_sql = Conexao::getConexao()->prepare($sql);
             $p_sql->bindValue(":id_medico", $medico->getId_medico());
             return $p_sql->execute();

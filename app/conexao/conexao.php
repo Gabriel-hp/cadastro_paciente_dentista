@@ -1,6 +1,6 @@
 <?php
+
 class Conexao {
-   
    public static $instance;
 
    private function __construct() {
@@ -16,5 +16,5 @@ class Conexao {
 
        return self::$instance;
    }
-
 }
+?>

@@ -1,14 +1,14 @@
-<main>
+<title>Médicos cadastrados</title>
+<main >
 
-    <h1 class="mt-3">medicos cadastrados</h1>
+    <h1 class="mt-3">Médicos cadastrados</h1>
         <hr>
 
         <nav class="navbar navbar-light bg-light menu">
         <div class="container">
-           <p>Lista de pacientes cadastrados</p>
+           <p>Lista de médicos cadastrados</p>
         </div>
     </nav>
-    <hr>
 
        
        <div class="table-responsive">
@@ -34,8 +34,8 @@
                             <td><?= $medico->getTelefone()?></td>
 
                             <td class="text-center">
-                                <button class="btn  btn-warning btn-sm" data-toggle="modal" data-target="#editar><?= $medico->getId_medico() ?>">
-                                    Editar
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar<?= $medico->getId_medico() ?>" >
+                                    Editar médico
                                 </button>
                                 <a href="app/controladores/medicoController.php?del=<?= $medico->getId_medico()?>">
                                 <button class="btn  btn-danger btn-sm" type="button">Excluir</button>
@@ -45,8 +45,9 @@
 
 
                         <!-- Modal para editar -->
-                        <div class="modal fade" id="editar><?= $medico->getId_medico() ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal fade" id="editar<?= $medico->getId_medico() ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                        <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
@@ -55,8 +56,10 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="app/controller/controller.php" method="POST">
+                                        <form action="app/controladores/MedicoController.php" method="POST">
                                             <div class="row">
+                                            <input type="hidden" name="id_medico" value="<?php echo $medico->getId_medico(); ?>">
+
 
                                                 <div class="col-md-5">
                                                     <label>Nome</label>
@@ -79,13 +82,12 @@
                                                 <label>Telefone</label>
                                                 <input type="text" name="telefone" placeholder="(92) 0000-0000" value="<?= $medico->getTelefone() ?>" class="form-control" required />
                     </div>
-
                                             </div>
 
                                             <div class="row">
                                                 <div class="col-md-2">
                                                     <br>
-                                                    <input type="hidden" name="id" value="<?= $medico->getId_medico() ?>" />
+                                                    <input type="hidden" name="id_medico" value="<?= $medico->getId_medico() ?>" />
                                                     <button class="btn btn-primary" type="submit" name="editar">Editar</button>
                                                 </div>
                                             </div>
@@ -103,9 +105,6 @@
         </div>
 
     </div>
-
-
-       
         
 
     </div>

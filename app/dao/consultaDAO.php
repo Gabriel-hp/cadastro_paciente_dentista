@@ -35,7 +35,8 @@ class ConsultaDAO {
             }
             
             $sql .= " ORDER BY id_consulta ASC";
-    
+            
+            
             $result = Conexao::getConexao()->query($sql);
             $lista = $result->fetchAll(PDO::FETCH_ASSOC);
             $f_lista = array();
@@ -49,28 +50,32 @@ class ConsultaDAO {
     }
     
      
-    public function update(consulta $consulta) {
+    public function update(Consulta $consulta) {
         try {
-            $sql = "UPDATE consulta SET
-                data_consulta = :data_consulta,
-                hora_consulta = :hora_consulta,
-                status = :status,
-                observacoes = :observacoes,
-                WHERE id_consulta = :id_consulta";
+            $sql = "UPDATE consultas SET id_paciente = :id_paciente, 
+                                        id_medico = :id_medico, 
+                                        data_consulta = :data_consulta, 
+                                        hora_consulta = :hora_consulta, 
+                                        status = :status, 
+                                        observacoes = :observacoes 
+                                        WHERE id_consulta = :id_consulta";
     
-                $p_sql = Conexao::getConexao()->prepare($sql);
-                $p_sql->bindValue(":id_paciente", $consulta->getIdPaciente());
-                $p_sql->bindValue(":id_medico", $consulta->getIdMedico());
-                $p_sql->bindValue(":data_consulta", $consulta->getDataConsulta());
-                $p_sql->bindValue(":hora_consulta", $consulta->getHoraConsulta());
-                $p_sql->bindValue(":status", $consulta->getStatus());
-                $p_sql->bindValue(":observacoes", $consulta->getObservacoes());
+            $p_sql = Conexao::getConexao()->prepare($sql);
+            $p_sql->bindValue(":id_paciente", $consulta->getId_paciente());
+            $p_sql->bindValue(":id_medico", $consulta->getId_medico());
+            $p_sql->bindValue(":data_consulta", $consulta->getData_consulta());
+            $p_sql->bindValue(":hora_consulta", $consulta->getHora_consulta());
+            $p_sql->bindValue(":status", $consulta->getStatus());
+            $p_sql->bindValue(":observacoes", $consulta->getObservacoes());
+            $p_sql->bindValue(":id_consulta", $consulta->getId_consulta());
+
     
             return $p_sql->execute();
         } catch (Exception $e) {
             print "Ocorreu um erro ao tentar fazer Update<br> $e <br>";
         }
     }
+    
     
 
     public function delete(consulta $consulta) {

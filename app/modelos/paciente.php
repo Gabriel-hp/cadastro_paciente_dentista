@@ -43,6 +43,7 @@ class paciente{
 
     function setTelefone($telefone) {
         $this->telefone = $telefone;
+        
     }
 
 

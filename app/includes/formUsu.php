@@ -1,3 +1,4 @@
+<title >Cadastrar pacientes</title>
 <main>
 
     <h1 class="mt-3">Cadastrar pacientes</h1>
@@ -10,7 +11,6 @@
         </div>
     </nav>
 
-    <hr>
     <div class="container">
         <form action="app/controladores/PacienteController.php" method="POST">
             <div class="row">
@@ -41,7 +41,7 @@
                 
                 <div class="col-md-5">
                     <br>
-                    <button class="btn btn-primary" type="submit" name="cadastrar">Marcar consulta</button>
+                    <button class="btn btn-primary" type="submit" name="cadastrar">Cadastrar pacientes</button>
                 </div>
             </div>
         </form>

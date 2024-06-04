@@ -1,3 +1,4 @@
+<title >Cadastrar médico</title>
 <main>
 
     <h1 class="mt-3">Cadastrar pacientes</h1>
@@ -10,7 +11,6 @@
         </div>
     </nav>
 
-    <hr>
 
     
     <div class="container">
