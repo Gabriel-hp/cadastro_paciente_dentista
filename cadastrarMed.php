@@ -1,13 +1,11 @@
 <?php 
     include_once "./app/conexao/conexao.php";
-    include_once "./app/dao/pacienteDAO.php";
-    include_once "./app/modelos/paciente.php";
+    include_once "./app/dao/medicoDAO.php";
+    include_once "./app/modelos/medico.php";
     
-
-
-    //instancia as classes
-    $paciente = new paciente();
-    $pacientedao = new pacienteDAO();
+    //instancia as classes MEDICO
+    $medico = new medico();
+    $medicodao = new medicoDAO();
 
 
     include __DIR__.'./app/includes/header.php';

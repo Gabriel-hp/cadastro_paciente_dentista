@@ -1,4 +1,5 @@
 <?php 
+
     //chama as classes CONSULTA 
     include_once "./app/conexao/conexao.php";
     include_once "./app/dao/consultaDAO.php";
@@ -8,6 +9,7 @@
     include_once "./app/conexao/conexao.php";
     include_once "./app/dao/pacienteDAO.php";
     include_once "./app/modelos/paciente.php";
+
 
     //chama as classes MEDICO
     include_once "./app/conexao/conexao.php";
