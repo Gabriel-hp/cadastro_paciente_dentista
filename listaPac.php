@@ -13,7 +13,7 @@
     include __DIR__.'./app/includes/header.php';
     include __DIR__.'./app/includes/incial.php';
     include __DIR__.'./app/includes/listarUsu.php'; 
-    include __DIR__.'./app/includes/footer.';
+    include __DIR__.'./app/includes/footer.php';
 
 
 
