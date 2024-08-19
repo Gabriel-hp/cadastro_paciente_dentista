@@ -1,6 +1,7 @@
 
 <?php 
 //CONEXÃO
+//conexao
 include_once "./app/conexao/conexao.php";
 
     include __DIR__.'./app/includes/header.php';
