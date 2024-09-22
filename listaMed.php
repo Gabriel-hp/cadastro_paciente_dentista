@@ -5,7 +5,8 @@
     
 
 
-    //instancia as classes
+    //instancia as classessa
+
     $medico = new medico();
     $medicodao = new medicoDAO();
 
